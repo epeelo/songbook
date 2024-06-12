@@ -411,7 +411,7 @@ div.container .hideable-dashboard .tags {
         }
         
         .hideable-dashboard .performers form {
-            width: 40em;
+            /*width: 40em;*/
         }
 
         .songs.view .performers fieldset .select2,

@@ -61,17 +61,17 @@ $(document).ready(function(){
 
     	<?php /* Hideable filter panel --------------------------------- */ ?>
     	<span class="container-hideable"  style="visibility: hidden;">
-        	<?= $this->Form->create($filtered_list, ['type' => 'get', 'url' => ['controller' => 'viewer', 'action' => 'index']]) ?>
+        	<?= $this->Form->create(null, ['type' => 'get', 'url' => ['controller' => 'viewer', 'action' => 'index']]) ?>
             <fieldset class="performer-tags-filter">
             
                 <span class="clear-filters button" onclick="SBK.CakeUI.form.clear_filters(this)">X</span>
                 <span class="performer-id tag-id">     
                 	<h3>Performer</h3>                     
-               		<?= $this->Form->control('performer_id', ['label' => '', 'empty' => 'Please select ...', 'options' => $performers, 'default' => $selected_performer]); ?>
+               		<?= $this->Form->control('performers[]', ['label' => '', 'empty' => 'Please select ...', 'options' => $performers, 'class'=>'exclude-from-select2', 'default' => $selected_performer]); ?>
                 </span>
                 <span class="tag-id">
                 	<h3>Tags</h3>
-                    <?= $this->Form->control('filter_tag_id', ['label' => 'Include songs with these:', 'options' => $all_tags, 'multiple' => true, 'default' => $selected_tags]); ?>
+                    <?= $this->Form->control('tags', ['label' => 'Include songs with these:', 'options' => $all_tags, 'multiple' => true, 'default' => $selected_tags]); ?>
                     <?= $this->Form->control('exclude_tag_id', ['label' => 'Exclude songs with any of these:', 'options' => $all_tags, 'multiple' => true, 'default' => $selected_exclude_tags]); ?>
                 </span>
                 
@@ -79,25 +79,32 @@ $(document).ready(function(){
                 </span>
             </fieldset>
             <?= $this->Form->end() ?>
-        	<a class="button" href = "/songbook/dashboard">Dashboard</a>
         	<ul>
-                <li><?= $this->Html->link(__('E-AMU'), ['controller' => 'viewer', 'action' => 'index', '?'=>['text_search'=>'', 'performer_id'=>'1', 'filter_tag_id'=>[15]]], ['target'=>'_blank']) ?></li>
-                <li><?= $this->Html->link(__('M-AMU'), ['controller' => 'viewer', 'action' => 'index', '?'=>['text_search'=>'', 'performer_id'=>'3', 'filter_tag_id'=>[15]]], ['target'=>'_blank']) ?></li>
-                <li><?= $this->Html->link(__('E-Irish'), ['controller' => 'viewer', 'action' => 'index', '?'=>['text_search'=>'', 'performer_id'=>'1', 'filter_tag_id'=>[2]]], ['target'=>'_blank']) ?></li>
+                <li><?= $this->Html->link(__('E-AMU'), ['controller' => 'viewer', 'action' => 'index', '?'=>['text_search'=>'', 'performer_id'=>'1', 'tags'=>[15], 'exclude_tag_id'=>[21]]], ['target'=>'_blank']) ?></li>
+                <li><?= $this->Html->link(__('M-AMU'), ['controller' => 'viewer', 'action' => 'index', '?'=>['text_search'=>'', 'performer_id'=>'3', 'tags'=>[15], 'exclude_tag_id'=>[21]]], ['target'=>'_blank']) ?></li>
+                <li><?= $this->Html->link(__('E-Irish'), ['controller' => 'viewer', 'action' => 'index', '?'=>['text_search'=>'', 'performer_id'=>'1', 'tags'=>[2, 25]]], ['target'=>'_blank']) ?></li>
                 <li><?= $this->Html->link(__('E-Lively-AMU'), ['controller' => 'viewer', 'action' => 'index', '?'=>['text_search'=>'', 'performer_id'=>'1', 'filter_tag_id'=>[13, 15]]], ['target'=>'_blank']) ?></li>
                 <li><?= $this->Html->link(__('Christmas-AMU'), ['controller' => 'viewer', 'action' => 'index', '?'=>['text_search'=>'', 'filter_tag_id'=>[15, 21]]], ['target'=>'_blank']) ?></li>
                 <li><?= $this->Html->link(__('Piano'), ['controller' => 'viewer', 'action' => 'index', '?'=>['text_search'=>'', 'filter_tag_id'=>[1]]], ['target'=>'_blank']) ?></li>
             </ul>
-        	<ul>
-                <li><?= $this->Html->link(__('Palette E-AMU'), ['controller' => 'viewer', 'action' => 'palette', '?'=>['palette_set'=>'Euge AMU']], ['target'=>'_blank']) ?></li>
-                <li><?= $this->Html->link(__('Palette E-Session'), ['controller' => 'viewer', 'action' => 'palette', '?'=>['palette_set'=>'Euge Session']], ['target'=>'_blank']) ?></li>
+        	<ul><?php 
+        	foreach($filter_definition_sets as $filter_set_name => $filter_set_definition) {
+        	    ?>
+                <li><?php
+                    echo $this->Html->link(__($filter_set_name), ['controller' => 'viewer', 'action' => 'palette', '?'=>['filter_set'=>http_build_query($filter_set_definition)]], ['target'=>'_blank']) 
+                ?></li><?php 
+        	}
+                ?>
+            </ul>
+            <ul>
+                <li><?= $this->Html->link(__('New Song'  ), ['controller' => 'Songs',      'action' => 'add'  ], ['target'=>'_blank']) ?></li>
+                <li><?= $this->Html->link(__('Dashboard' ), ['controller' => 'Dashboard',      'action' => 'index'], ['target'=>'_blank']) ?></li>
             </ul>
         </span>
         <?php /* end of Hideable filter panel --------------------------------- */ ?>
     </span>
-
 <?php 
-echo $this->element('filtered_songlist', ['filter_on'=>$filter_on, 'selected_performer'=>$selected_performer]);
+	echo $filtered_list;
 ?>
 </div>
 <div id="viewer-main" >

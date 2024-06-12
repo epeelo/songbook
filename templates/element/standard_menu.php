@@ -1,12 +1,14 @@
 <nav class="large-2 medium-2 columns" id="actions-sidebar">
 <?= $this->Form->create(Null, ['url' => ['controller' => 'dashboard', 'action' => 'index']]) ?>
-<fieldset>
+<!-- fieldset>
 	<span class="text-search">
-	<?= $this->Form->control('text_search', ['label'=>'Text Search (name only)']); ?>
+	<?php 
+	// echo $this->Form->control('text_search', ['label'=>'Text Search (name only)']); 
+	?>
 	</span>
 	
 	<span class="search button"><?= $this->Form->button(__('Search')) ?></span>
-</fieldset>
+</fieldset -->
 <?= $this->Form->end() ?>
 
 <?php if(isset($delete_id)) {?>
@@ -19,6 +21,7 @@
 <?php  }?>
 <ul class="side-nav">
 	<li class="heading"><?= __('Main Menu') ?></li>
+    <li><?= $this->Html->link(__('Viewer'), ['controller' => 'Viewer', 'action' => 'index']) ?></li>
     <li><?= $this->Html->link(__('Dashboard'), ['controller' => 'Dashboard', 'action' => 'index']) ?></li>
 	<li><?= $this->Html->link(__('New Song'), ['controller' => 'Songs', 'action' => 'add']) ?></li>
 	<li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?></li>

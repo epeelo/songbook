@@ -369,45 +369,70 @@ tr.song-row.ui-selected .song-title {
 }
 
 /* songs edit */
-.songs-edit .song-input-title {
+.songs-edit label,
+.songs-add label {
+
+    margin-right: 5px;
+	color: gray;
+}
+
+.songs-edit .song-input-title,
+.songs-add .song-input-title {
     display: block;
 }
-.songs-edit .song-input-written_by {
+.songs-edit .song-input-written_by,
+.songs-add .song-input-written_by {
+    display: inline-block;
+    min-width: 15em;
+    width: 25%;
+    margin-top: 5px;
+}
+.songs-edit .song-input-performed_by,
+.songs-add .song-input-performed_by {
     display: inline-block;
     min-width: 15em;
     width: 25%;
     
 }
-.songs-edit .song-input-performed_by {
-    display: inline-block;
-    min-width: 15em;
-    width: 25%;
-    
-}
-.songs-edit .song-input-base_key {
+.songs-edit .song-input-base_key,
+.songs-add .song-input-base_key {
     display: inline-block;
     min-width: 15em;
     width: 25%;
     
 }
 .songs-edit .song-input-content,
-.songs-edit .song-input-content div.textarea {
+.songs-edit .song-input-content div.textarea,
+.songs-add .song-input-content,
+.songs-add .song-input-content div.textarea  {
     display: block;
     height: 30em;
+    margin-top: 5px;
     
 }
-.songs-edit .song-input-content textarea {
+.songs-edit .song-input-content textarea,
+.songs-add .song-input-content textarea {
 	height: 100%;
+	width: 100%;
 }
-.songs-edit .song-input-tags {
+.songs-edit .song-input-tags,
+.songs-add .song-input-tags  {
     display: inline-block;
     height: 5em;
-    
 }
-.songs-edit .song-input-tags textarea {
+.songs-edit .song-input-tags textarea,
+.songs-add .song-input-tags textarea  {
 	height: 2em;
 }
 
+
+
+.songs-add #title-error {
+	display: inline-block;
+	color: grey;
+	font-style: italic;
+	font-size: 0.8em;
+}
 
 
 

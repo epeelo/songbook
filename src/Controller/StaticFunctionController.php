@@ -234,11 +234,11 @@ class StaticFunctionController extends AppController
 		    "{",
 		    "}",
 		    "x{0040}",   //at symbol (commat)    @
-		    "x{00A9}",   //Copyright symbol      ©
-		    "x{2018}",   //OpenCurlyQuote        ‘
-		    "x{2019}",   //CloseCurlyQuote       ’
-		    "x{201C}",   //OpenCurlyDoubleQuote  “
-		    "x{201D}"    //CloseCurlyDoubleQuote ”
+		    "x{00A9}",   //Copyright symbol      ï¿½
+		    "x{2018}",   //OpenCurlyQuote        ï¿½
+		    "x{2019}",   //CloseCurlyQuote       ï¿½
+		    "x{201C}",   //OpenCurlyDoubleQuote  ï¿½
+		    "x{201D}"    //CloseCurlyDoubleQuote ï¿½
 		);
 		$exception_string = "";
 		$ignore_string = "";
@@ -952,7 +952,9 @@ class StaticFunctionController extends AppController
 	        $use_sharps = false;
 		} elseif (substr($target_key, 0, 1) == 'F') {
 		    $use_sharps = false;
-		} elseif (substr($target_key, 0, 2) == 'Dm' || 'Gm') {
+		} elseif (substr($target_key, 0, 2) == 'Dm') {
+		    $use_sharps = false;
+		} elseif (substr($target_key, 0, 2) == 'Gm') {
 		    $use_sharps = false;
 		} elseif (substr($target_key, 1, 0) == 'C') {
 		    $use_sharps = null;

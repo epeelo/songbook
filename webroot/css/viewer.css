@@ -20,7 +20,7 @@ html, body, div.container, table#viewer{
 	
 }
 
-.filtered-songlist .current-filter {
+.filtered-songlist .filter-title {
 	/*color: white;*/
 	display: inline-block;
 	padding: 5px;
@@ -28,7 +28,111 @@ html, body, div.container, table#viewer{
 	padding-right: 15px;
 	background-color: #cccccc;
 	font-size: 0.8em;
+	width: 75%;
 }
+
+.filtered-songlist .filter-title span {
+	display: inline-block;
+	vertical-align: middle;
+}
+.filtered-songlist .filter-title label {
+	display: none;
+}
+
+.filtered-songlist .filter-title span.performer.include {
+	font-size: 1em;
+	margin-right: 3px;
+	padding-right: 3px;
+	border-right: 1px solid gray;
+}
+.filtered-songlist .filter-title span.performer.exclude {
+	display: none;	
+}
+
+.filtered-songlist .filter-title span.tag {
+	max-width: 30px;
+	overflow: hidden;
+	margin-right: 5px;
+	white-space: nowrap;
+}
+.filtered-songlist .filter-title span.tag.include {
+	font-size: 1em;
+}
+
+.filtered-songlist .filter-title span.tag.exclude {
+	font-size: 0.8em;
+	text-decoration: line-through;
+}
+
+.filtered-songlist .filter-title .query-count {
+	font-size: 0.8em;
+	color: white;
+}
+
+/***************************************************/
+
+
+.filtered-songlist span.filter-title.expanded {
+	/*color: white;*/
+	display: block;
+	background-color: #fdfdfd;
+	border: 1px solid gray;
+	border-top: 15px solid #cccccc;
+	font-size: 0.8em;
+}
+
+.filtered-songlist .filter-title.expanded span {
+	display: inline-block;
+	vertical-align: middle;
+}
+.filtered-songlist .filter-title.expanded span.tag::after {
+	content: ", ";
+}
+.filtered-songlist .filter-title.expanded span.performer::after {
+	content: ", ";
+}
+
+.filtered-songlist .filter-title.expanded label {
+	display: inline-block;
+	margin-top: 5px;
+	margin-right: 5px;
+	color: gray;
+}
+
+.filtered-songlist .filter-title.expanded span.performer.include {
+	display: block;
+	border: none;
+}
+.filtered-songlist .filter-title.expanded span.performer.exclude {
+	display: none;	
+}
+
+.filtered-songlist .filter-title.expanded span.tag {
+	max-width: none;
+	overflow: hidden;
+	margin-right: 5px;
+	white-space: nowrap;
+}
+.filtered-songlist .filter-title.expanded span.tag.include {
+	font-size: 1em;
+}
+
+.filtered-songlist .filter-title.expanded span.tag.exclude {
+	font-size: 0.8em;
+	text-decoration: line-through;
+}
+
+.filtered-songlist .filter-title.expanded .query-count {
+	display: block;
+	font-size: 1em;
+	color: black;
+}
+
+
+
+
+
+/*****************************************************/
 
 .filtered-songlist .performer.short-form {
 	display: inline-block;
@@ -123,6 +227,12 @@ span.container-hideable {
 }
 span.container-hideable select {
 	width: 240px;
+}
+span.container-hideable select#performers {
+	width: 210px;
+	background-color: transparent;
+	border: 1px solid silver;
+	padding: 10px;
 }
 
 .button  {

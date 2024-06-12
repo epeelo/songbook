@@ -15,7 +15,9 @@
 
  <span id="hideable_dashboard_positioning_container">
         <div class="hideable-dashboard hideable-visible song-row" style="visibility: hidden;">
-        	<?php /* -----||Button to open the dashboard (in a different tab) */ ?>
+        	<?php /* -----||Button to open the Viewer (in a different tab) */ ?>
+            <span class="button float-right top-button-set"><?= $this->Html->link(__('Viewer'), ['controller' => 'Viewer', 'action' => 'index', 'target' => '_blank']) ?></span>
+            <?php /* -----||Button to open the dashboard (in a different tab) */ ?>
             <span class="button float-right top-button-set"><?= $this->Html->link(__('Dashboard'), ['controller' => 'Dashboard', 'action' => 'index', 'target' => '_blank']) ?></span>
             
         	<?php /* -----||Button to open the current song in a different tab */ ?>
