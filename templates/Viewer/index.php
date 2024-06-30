@@ -21,7 +21,7 @@ $(document).ready(function(){
     	this_li = jQuery(event.target).closest('li');
         target_iframe = jQuery('#viewer-main>iframe');
 
-		link_url = '/songbook/songs/embedded/' + this_li.attr('data-id') + '?vw=' + target_iframe.width() + '&vh=' + target_iframe.height() + '&key=' + this_li.attr('data-key') + '&capo=' + this_li.attr('data-capo') + '';
+		link_url = '/songbook/songs/embedded/' + encodeURIComponent(this_li.attr('data-id')) + '?vw=' + target_iframe.width() + '&vh=' + target_iframe.height() + '&key=' + encodeURIComponent(this_li.attr('data-key')) + '&capo=' + this_li.attr('data-capo') + '';
     	
     	console.log(this_li, link_url);
     	target_iframe.attr('src', link_url);
