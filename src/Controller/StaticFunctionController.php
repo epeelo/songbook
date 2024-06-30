@@ -393,10 +393,13 @@ class StaticFunctionController extends AppController
             $line_with_chords_removed = $xpath->query("span[not (@class='chord')]",         $this_line);
 			
 			//does this line have an image?
-			$image = $xpath->query(".//img/@src", $this_line);
-			if($image->length) {
-			    $imagesize = getimagesize(str_replace('/songbook/score/', WWW_ROOT . 'score/', $image[0]->textContent));
+			$image_src = $xpath->query(".//img/@src", $this_line);
+			if($image_src->length) {
+			    $imagesize = getimagesize(str_replace('/songbook/score/', WWW_ROOT . 'score/', $image_src[0]->textContent));
 			    $line_height_px = ($line_stats['px_per_column']/$imagesize[0]) * $imagesize[1];
+			    $image = $xpath->query(".//img", $this_line);
+			    //debug($image[0]);
+			    $image[0]->setAttribute("style", "width: " . $line_stats['px_per_column'] . "px;");
 			} else {
 			    if ($line_contains_chords > 0){
 			        $line_height_px = $page_parameters["height_of_line_with_chords"];
@@ -703,7 +706,10 @@ class StaticFunctionController extends AppController
 	        $image = $xpath->query(".//img/@src", $this_line);
 	        if($image->length) {
 	            $imagesize = getimagesize(str_replace('/songbook/score/', WWW_ROOT . 'score/', $image[0]->textContent));
-	            $line_height_px = ($line_stats['px_per_column']/$imagesize[0]) * $imagesize[1];
+	            //20231205 using $max_columns because I have no way of knowing what the actual number of columns will be.
+	            $line_height_px = ($column_params[1]["width (px)"]/$imagesize[0]) * $imagesize[1];
+	            //20231205 using image = 10 lines high because I have no way of knowing the actual width so there fore th actual height
+	            $line_height_lines = 10;
 	        } else {
 	            if ($line_contains_chords > 0){ 
 	                $line_height_px = $page_parameters["height_of_line_with_chords"];

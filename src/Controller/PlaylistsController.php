@@ -125,8 +125,8 @@ class PlaylistsController extends AppController
     public function add()
     {
         $playlist = $this->Playlists->newEntity([]);
-        if ($this->request->is('post')) {
-            $playlist = $this->Playlists->patchEntity($playlist, $this->request->data);
+        if ($this->getRequest()->is('post')) {
+            $playlist = $this->Playlists->patchEntity($playlist, $this->getRequest()->getData());
             if ($this->Playlists->save($playlist)) {
                 $this->Flash->success(__('The playlist has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -163,8 +163,8 @@ class PlaylistsController extends AppController
         $playlist = $this->Playlists->get($id, [
             'contain' => ['Performers', 'PlaylistSets' => ['Sets'=> ['Performers', 'SetSongs'=>['Songs', 'sort' => ['SetSongs.order' => 'ASC']]], 'sort' => ['PlaylistSets.order' => 'ASC']]]
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $playlist = $this->Playlists->patchEntity($playlist, $this->request->data);
+        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
+            $playlist = $this->Playlists->patchEntity($playlist, $this->getRequest()->data);
             if ($this->Playlists->save($playlist)) {
                 $this->Flash->success(__('The playlist has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -191,13 +191,16 @@ class PlaylistsController extends AppController
                 ]
             )
         );
-        $this->set('sets', $this->Playlists->PlaylistSets->sets->find('list', [
+        debug($this->Playlists->PlaylistSets);
+
+        $this->set(['sets', $this->Playlists->PlaylistSets->sets->find('list', [
             		'keyField' => 'id',
             		'valueField' =>  function ($e) {
 	        			return $e['title']."  (performer ".$e['performer_id'].")";
 	        		}
                 ]
             )
+            ]
         );
     }
 
@@ -210,7 +213,7 @@ class PlaylistsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod(['post', 'delete']);
         $playlist = $this->Playlists->get($id);
         if ($this->Playlists->delete($playlist)) {
             $this->Flash->success(__('The playlist has been deleted.'));
