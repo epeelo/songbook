@@ -108,6 +108,17 @@
                             echo '<span class="performer" onclick="SBK.CakeUI.form.submit_value_json(\'{&quot;key_input&quot;:&quot;'.$set_song['key'].'&quot;, &quot;capo_input&quot;:'.$set_song['capo'].'}\')">';
                             echo '<span class="nickname">'.$set_song['performer']['nickname'].' : </span>';
                             echo '<span class="key">'.$set_song['key'].'</span>';
+                            //Button to open in a different tab) the editor for the current 'setsong'
+                            echo $this->Html->link(__(
+                                'edit'
+                                ), [
+                                'controller' => 'SetSongs',
+                                'action' => 'edit',
+                                $set_song->id
+                                ], [
+                                'class'=>'button',
+                                'target'=>'new'
+                        	    ]) ;
                             //echo '<span class="capo">'.$set_song['capo'].'</span>'; 
                             echo '</span>';
                         } 

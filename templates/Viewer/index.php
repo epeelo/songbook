@@ -98,7 +98,7 @@ $(document).ready(function(){
             </ul>
             <ul>
                 <li><?= $this->Html->link(__('New Song'  ), ['controller' => 'Songs',      'action' => 'add'  ], ['target'=>'_blank']) ?></li>
-                <li><?= $this->Html->link(__('Dashboard' ), ['controller' => 'Dashboard',      'action' => 'index'], ['target'=>'_blank']) ?></li>
+                <li><?= $this->Html->link(__('Dashboard' ), ['controller' => 'Dashboard',  'action' => 'index'], ['target'=>'_blank']) ?></li>
             </ul>
         </span>
         <?php /* end of Hideable filter panel --------------------------------- */ ?>
