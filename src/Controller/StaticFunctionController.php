@@ -171,6 +171,8 @@ class StaticFunctionController extends AppController
 	}
 	
     public static function convert_song_content_to_HTML($content, $base_key = NULL, $display_key = NULL, $capo = NULL) {
+        
+        //Set the transpose parameters
 		if (is_null($base_key)) {
 			StaticFunctionController::$key_transpose_parameters = array(
 				'transpose' => false
@@ -190,7 +192,10 @@ class StaticFunctionController extends AppController
 		/*
 		debug(StaticFunctionController::$key_transpose_parameters);
 		// */
+		
+		
 		$contentHTML = $content;
+		
 		//if special characters have found their way into  lyrics in the database, get rid of them
 		$contentHTML = preg_replace('/&nbsp;/', ' ', $contentHTML);
 		$contentHTML = preg_replace('/<br>/', "
@@ -260,7 +265,14 @@ class StaticFunctionController extends AppController
         // ignoring html and chords first, and also &#38; then the "ignore list" above
         //any text between {} should be ignored - it's considered a performance direction
         //a problem arose in one song with "de[G]ad.[G#dim]" at the end of a line. The ".[" ended up with a word boundary between . and [ . so add an exception for characters in front of [: \.? \[.*?\][\w]?
-        //debug($ignore_string);
+
+        //https://stackoverflow.com/questions/24534782/how-do-skip-or-f-work-on-regex
+        // The idea of the (*SKIP)(*FAIL) trick is to consume characters that you want to avoid, and that must not be a part of the match result.
+        //
+        // A classical pattern that uses of this trick looks like that:
+        //
+        // What_I_want_to_avoid(*SKIP)(*FAIL)|What_I_want_to_match
+        
         $contentHTML = preg_replace('/<.*?>(*SKIP)(*FAIL)|\{.*?\}(*SKIP)(*FAIL)|[' . $exception_string . '^\n]?\[.*?\][\w]?(*SKIP)(*FAIL)|' . $ignore_string . '\b/u', '</span><span class="word">', $contentHTML); 
         //debug($contentHTML);
         //if a chord is at the start of a line, instead of inside a word, it is missed by the regex above.
